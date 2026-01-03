@@ -62,6 +62,9 @@ export function getWeekStart(date: Date): Date {
 
 /**
  * Get the current day of week as our DayOfWeek type
+ *
+ * TEMPORARY FOR TESTING: Weekends default to Monday
+ * TODO: Remove this after testing - weekends should return null
  */
 export function getCurrentDayOfWeek(): DayOfWeek | null {
   const day = new Date().getDay();
@@ -72,7 +75,9 @@ export function getCurrentDayOfWeek(): DayOfWeek | null {
     4: 'thursday',
     5: 'friday',
   };
-  return dayMap[day] || null;
+
+  // TESTING MODE: Default to Monday on weekends
+  return dayMap[day] || 'monday';
 }
 
 /**
