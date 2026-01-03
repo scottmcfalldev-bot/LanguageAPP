@@ -4,6 +4,8 @@
 
 A research-backed language learning application designed for simultaneous acquisition of Spanish, Japanese, and Mandarin Chinese.
 
+🚀 **[Live Demo](https://[your-username].github.io/LanguageAPP/)** • 📖 **[Deployment Guide](DEPLOYMENT.md)**
+
 ## The Science Behind PolyPath
 
 Unlike gamified apps that prioritize engagement over effectiveness, PolyPath is built on peer-reviewed cognitive science research:
