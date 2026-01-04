@@ -18,6 +18,7 @@ export function GlossReader({ language, onComplete }: GlossReaderProps) {
   const glosses = getGlossesByLanguage(language);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showBreakdown, setShowBreakdown] = useState(false);
+  const [showDirectionInfo, setShowDirectionInfo] = useState(true);
 
   const currentGloss = glosses[currentIndex];
 
@@ -52,6 +53,26 @@ export function GlossReader({ language, onComplete }: GlossReaderProps) {
           {currentIndex + 1} / {glosses.length}
         </div>
       </div>
+
+      {/* Reading direction info for Japanese/Mandarin */}
+      {(language === 'japanese' || language === 'mandarin') && showDirectionInfo && currentIndex === 0 && (
+        <div className="direction-info">
+          <div className="direction-info-content">
+            <strong>📖 Reading Direction:</strong>
+            <p>
+              {language === 'japanese'
+                ? 'Modern Japanese (shown here) reads left→right horizontally. Traditional vertical writing reads top→bottom, with columns going right→left.'
+                : 'Modern Mandarin (shown here) reads left→right horizontally. Classical Chinese vertical texts read top→bottom, with columns going right→left.'}
+            </p>
+            <button
+              className="btn-dismiss"
+              onClick={() => setShowDirectionInfo(false)}
+            >
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="gloss-content">
         {/* Original phrase in large text */}

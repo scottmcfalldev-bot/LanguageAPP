@@ -96,7 +96,7 @@ export const japaneseGlosses: Gloss[] = [
     ],
     literalTranslation: 'I [topic] student [is]',
     naturalTranslation: 'I am a student',
-    notes: 'は (wa) marks the topic. です (desu) is the polite form of "to be". No articles in Japanese.',
+    notes: '📖 Reading Direction: This uses modern horizontal writing (left→right). Traditional vertical Japanese reads top→bottom, with columns going right→left. | は (wa) marks the topic. です (desu) is the polite form of "to be". No articles in Japanese.',
   },
   {
     id: 'jp-2',

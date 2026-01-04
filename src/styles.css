@@ -850,6 +850,60 @@ button {
   text-align: center;
 }
 
+/* Reading Direction Info Box */
+.direction-info {
+  margin-bottom: 2rem;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.direction-info-content {
+  background: rgba(59, 130, 246, 0.1);
+  border: 2px solid var(--color-primary);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.direction-info-content strong {
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+.direction-info-content p {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.btn-dismiss {
+  align-self: flex-end;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background 0.2s;
+}
+
+.btn-dismiss:hover {
+  background: #2563eb;
+}
+
 .gloss-subtitle {
   color: var(--color-text-secondary);
   font-size: 0.875rem;
