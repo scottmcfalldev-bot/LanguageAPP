@@ -32,11 +32,206 @@ body {
   line-height: 1.6;
 }
 
+/* App Container with Sidebar */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+.app-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
 .app {
   min-height: 100vh;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+}
+
+/* Navigation Sidebar */
+.app-nav {
+  width: 250px;
+  background: var(--color-surface);
+  border-right: 2px solid var(--color-surface-light);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.nav-header {
+  padding: 0 1.5rem 2rem 1.5rem;
+  border-bottom: 2px solid var(--color-surface-light);
+}
+
+.nav-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--color-spanish), var(--color-japanese), var(--color-mandarin));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.25rem;
+}
+
+.nav-tagline {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 2rem 0.75rem;
+  flex: 1;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9375rem;
+  text-align: left;
+}
+
+.nav-link:hover {
+  background: var(--color-surface-light);
+}
+
+.nav-link.active {
+  background: var(--color-primary);
+  color: white;
+}
+
+.nav-icon {
+  font-size: 1.25rem;
+}
+
+/* Home Header */
+.home-header {
+  margin-bottom: 2rem;
+}
+
+.home-header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.home-subtitle {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+}
+
+/* Reading Practice Home */
+.reading-practice-home {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.reading-subtitle {
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+}
+
+.reading-language-select {
+  margin: 3rem 0;
+}
+
+.reading-language-select h3 {
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.language-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.language-card {
+  background: var(--color-surface);
+  border: 2px solid var(--color-surface-light);
+  border-radius: 1rem;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.language-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.language-card.spanish:hover {
+  border-color: var(--color-spanish);
+}
+
+.language-card.japanese:hover {
+  border-color: var(--color-japanese);
+}
+
+.language-card.mandarin:hover {
+  border-color: var(--color-mandarin);
+}
+
+.card-flag {
+  font-size: 3rem;
+}
+
+.card-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-count {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.reading-info {
+  background: var(--color-surface);
+  padding: 2rem;
+  border-radius: 1rem;
+  border-left: 4px solid var(--color-primary);
+}
+
+.reading-info h4 {
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+}
+
+.reading-info ul {
+  list-style-position: inside;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+.reading-info li {
+  margin: 0.5rem 0;
 }
 
 /* Header */
@@ -838,6 +1033,47 @@ button {
 
 /* Responsive */
 @media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+
+  .app-nav {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 2px solid var(--color-surface-light);
+  }
+
+  .nav-header {
+    padding: 1rem;
+  }
+
+  .nav-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .nav-links {
+    flex-direction: row;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  .nav-link {
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.75rem 1rem;
+    min-width: 90px;
+  }
+
+  .nav-link span:last-child {
+    font-size: 0.75rem;
+  }
+
+  .app-content {
+    padding: 1rem;
+  }
+
   .app {
     padding: 1rem;
   }
@@ -855,6 +1091,10 @@ button {
   }
 
   .language-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .language-cards {
     grid-template-columns: 1fr;
   }
 

@@ -18,7 +18,8 @@ import { ProgressDashboard } from './components/ProgressDashboard';
 import { GlossReader } from './components/GlossReader';
 import './styles.css';
 
-type SessionPhase = 'start' | 'srs' | 'gloss' | 'conversation' | 'writing' | 'complete';
+type SessionPhase = 'start' | 'srs' | 'conversation' | 'writing' | 'complete';
+type AppView = 'home' | 'reading' | 'progress';
 
 function App() {
   const [state, setState] = useState<AppState>(() => {
@@ -29,7 +30,8 @@ function App() {
   });
   const [currentPhase, setCurrentPhase] = useState<SessionPhase>('start');
   const [currentLanguage, setCurrentLanguage] = useState<Language | null>(null);
-  const [showDashboard, setShowDashboard] = useState(false);
+  const [currentView, setCurrentView] = useState<AppView>('home');
+  const [readingLanguage, setReadingLanguage] = useState<Language | null>(null);
 
   // Save state whenever it changes
   useEffect(() => {
@@ -65,10 +67,6 @@ function App() {
       return { ...prev, cards: updatedCards };
     });
 
-    setCurrentPhase('gloss');
-  };
-
-  const handleGlossComplete = () => {
     setCurrentPhase('conversation');
   };
 
@@ -113,20 +111,127 @@ function App() {
     return scenarios[language];
   };
 
-  if (showDashboard) {
+  // Render navigation sidebar
+  const renderNav = () => (
+    <nav className="app-nav">
+      <div className="nav-header">
+        <h1>PolyPath</h1>
+        <p className="nav-tagline">Evidence-Based Learning</p>
+      </div>
+      <div className="nav-links">
+        <button
+          className={`nav-link ${currentView === 'home' ? 'active' : ''}`}
+          onClick={() => {
+            setCurrentView('home');
+            setCurrentPhase('start');
+            setCurrentLanguage(null);
+            setReadingLanguage(null);
+          }}
+        >
+          <span className="nav-icon">📚</span>
+          <span>Today's Session</span>
+        </button>
+        <button
+          className={`nav-link ${currentView === 'reading' ? 'active' : ''}`}
+          onClick={() => setCurrentView('reading')}
+        >
+          <span className="nav-icon">📖</span>
+          <span>Reading Practice</span>
+        </button>
+        <button
+          className={`nav-link ${currentView === 'progress' ? 'active' : ''}`}
+          onClick={() => setCurrentView('progress')}
+        >
+          <span className="nav-icon">📊</span>
+          <span>Progress</span>
+        </button>
+      </div>
+    </nav>
+  );
+
+  // Reading Practice View
+  if (currentView === 'reading') {
+    if (!readingLanguage) {
+      return (
+        <div className="app-container">
+          {renderNav()}
+          <div className="app-content">
+            <div className="reading-practice-home">
+              <h2>Reading Practice</h2>
+              <p className="reading-subtitle">
+                Character-by-character breakdown with visual mapping to English
+              </p>
+
+              <div className="reading-language-select">
+                <h3>Choose a language:</h3>
+                <div className="language-cards">
+                  <button
+                    className="language-card spanish"
+                    onClick={() => setReadingLanguage('spanish')}
+                  >
+                    <div className="card-flag">🇪🇸</div>
+                    <div className="card-name">Spanish</div>
+                    <div className="card-count">4 examples</div>
+                  </button>
+                  <button
+                    className="language-card japanese"
+                    onClick={() => setReadingLanguage('japanese')}
+                  >
+                    <div className="card-flag">🇯🇵</div>
+                    <div className="card-name">Japanese</div>
+                    <div className="card-count">4 examples</div>
+                  </button>
+                  <button
+                    className="language-card mandarin"
+                    onClick={() => setReadingLanguage('mandarin')}
+                  >
+                    <div className="card-flag">🇨🇳</div>
+                    <div className="card-name">Mandarin</div>
+                    <div className="card-count">5 examples</div>
+                  </button>
+                </div>
+              </div>
+
+              <div className="reading-info">
+                <h4>What you'll learn:</h4>
+                <ul>
+                  <li>See how each language constructs meaning differently</li>
+                  <li>Understand character/word-by-character breakdowns</li>
+                  <li>Compare literal vs. natural English translations</li>
+                  <li>Learn grammar patterns through visual mapping</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <div className="app">
-        <header className="app-header">
-          <h1>PolyPath</h1>
-          <button className="btn-secondary" onClick={() => setShowDashboard(false)}>
-            Back to Learning
-          </button>
-        </header>
-        <ProgressDashboard
-          progress={state.userProgress}
-          schedule={state.weeklySchedule}
-          cards={state.cards}
-        />
+      <div className="app-container">
+        {renderNav()}
+        <div className="app-content">
+          <GlossReader
+            language={readingLanguage}
+            onComplete={() => setReadingLanguage(null)}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // Progress View
+  if (currentView === 'progress') {
+    return (
+      <div className="app-container">
+        {renderNav()}
+        <div className="app-content">
+          <ProgressDashboard
+            progress={state.userProgress}
+            schedule={state.weeklySchedule}
+            cards={state.cards}
+          />
+        </div>
       </div>
     );
   }
@@ -134,83 +239,83 @@ function App() {
   if (currentPhase === 'srs' && currentLanguage) {
     const dueCards = getDueCardsByLanguage(state.cards, currentLanguage);
     return (
-      <div className="app">
-        <CardReview
-          cards={dueCards}
-          onReviewComplete={handleSRSComplete}
-          onExit={() => setCurrentPhase('gloss')}
-        />
-      </div>
-    );
-  }
-
-  if (currentPhase === 'gloss' && currentLanguage) {
-    return (
-      <div className="app">
-        <GlossReader
-          language={currentLanguage}
-          onComplete={handleGlossComplete}
-        />
+      <div className="app-container">
+        {renderNav()}
+        <div className="app-content">
+          <CardReview
+            cards={dueCards}
+            onReviewComplete={handleSRSComplete}
+            onExit={() => setCurrentPhase('conversation')}
+          />
+        </div>
       </div>
     );
   }
 
   if (currentPhase === 'conversation' && currentLanguage) {
     return (
-      <div className="app">
-        <ConversationPractice
-          language={currentLanguage}
-          scenario={getConversationScenario(currentLanguage)}
-          onComplete={handleConversationComplete}
-          onExit={() => setCurrentPhase('writing')}
-        />
+      <div className="app-container">
+        {renderNav()}
+        <div className="app-content">
+          <ConversationPractice
+            language={currentLanguage}
+            scenario={getConversationScenario(currentLanguage)}
+            onComplete={handleConversationComplete}
+            onExit={() => setCurrentPhase('writing')}
+          />
+        </div>
       </div>
     );
   }
 
   if (currentPhase === 'writing' && currentLanguage) {
     return (
-      <div className="app">
-        <WritingExercise
-          language={currentLanguage}
-          prompt={getWritingPrompt(currentLanguage)}
-          onComplete={handleWritingComplete}
-          onExit={handleSessionComplete}
-        />
+      <div className="app-container">
+        {renderNav()}
+        <div className="app-content">
+          <WritingExercise
+            language={currentLanguage}
+            prompt={getWritingPrompt(currentLanguage)}
+            onComplete={handleWritingComplete}
+            onExit={handleSessionComplete}
+          />
+        </div>
       </div>
     );
   }
 
   if (currentPhase === 'complete') {
     return (
-      <div className="app">
-        <div className="session-complete">
-          <h2>Session Complete!</h2>
-          <p>Great work today. Consistency is key to language mastery.</p>
-          <div className="complete-stats">
-            <p>Time spent: 30 minutes</p>
-            <p>Current streak: {state.userProgress.currentStreak} days</p>
+      <div className="app-container">
+        {renderNav()}
+        <div className="app-content">
+          <div className="session-complete">
+            <h2>Session Complete!</h2>
+            <p>Great work today. Consistency is key to language mastery.</p>
+            <div className="complete-stats">
+              <p>Time spent: 30 minutes</p>
+              <p>Current streak: {state.userProgress.currentStreak} days</p>
+            </div>
+            <button className="btn-primary" onClick={handleSessionComplete}>
+              Done
+            </button>
           </div>
-          <button className="btn-primary" onClick={handleSessionComplete}>
-            Done
-          </button>
         </div>
       </div>
     );
   }
 
-  // Start screen
+  // Home - Start screen
   return (
-    <div className="app">
-      <header className="app-header">
-        <h1>PolyPath</h1>
-        <p className="tagline">Evidence-Based Polyglot Learning</p>
-        <button className="btn-secondary" onClick={() => setShowDashboard(true)}>
-          View Progress
-        </button>
-      </header>
+    <div className="app-container">
+      {renderNav()}
+      <div className="app-content">
+        <div className="home-header">
+          <h2>Welcome Back!</h2>
+          <p className="home-subtitle">Ready for today's learning session?</p>
+        </div>
 
-      <main className="main-content">
+      <div className="main-content">
         {!currentDay ? (
           <div className="weekend-message">
             <h2>Weekend - Time to Rest</h2>
@@ -289,7 +394,8 @@ function App() {
             </div>
           </div>
         </div>
-      </main>
+      </div>
+      </div>
     </div>
   );
 }
