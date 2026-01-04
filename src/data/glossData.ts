@@ -12,6 +12,7 @@ export interface GlossSegment {
   pronunciation: string; // Romanization (pinyin, romaji, etc.)
   meaning: string;       // Literal English meaning
   context?: string;      // Grammatical function and why it's used
+  phonetic?: string;     // English-approximation pronunciation guide
 }
 
 export interface Gloss {
@@ -205,18 +206,21 @@ export const mandarinGlosses: Gloss[] = [
       {
         original: '我',
         pronunciation: 'wǒ',
+        phonetic: 'WUH ↘↗',
         meaning: 'I',
         context: 'Personal pronoun (1st person singular). Subject of the sentence. Can be omitted when context is clear.'
       },
       {
         original: '是',
         pronunciation: 'shì',
+        phonetic: 'SHIR ↘',
         meaning: 'am/is/are',
         context: 'Copula verb meaning "to be". Does NOT change form for different subjects - same for I/you/he/we/they. No conjugation!'
       },
       {
         original: '学生',
         pronunciation: 'xuéshēng',
+        phonetic: 'shweh-SHUNG ↗ →',
         meaning: 'student',
         context: 'Noun made of 2 characters: 学 (study/learning) + 生 (person/life) = "study person". Common character-building pattern.'
       },
@@ -232,25 +236,29 @@ export const mandarinGlosses: Gloss[] = [
     segments: [
       {
         original: '我',
-        pronunciation: 'wǐ',
+        pronunciation: 'wǒ',
+        phonetic: 'WUH ↘↗',
         meaning: 'I',
         context: 'Personal pronoun. Subject of the sentence.'
       },
       {
         original: '喜欢',
         pronunciation: 'xǐhuan',
+        phonetic: 'shee-HWAN ↗ →',
         meaning: 'like',
         context: 'Verb meaning "to like/enjoy". Can be followed directly by another verb (no "to" needed). This is verb chaining!'
       },
       {
         original: '喝',
         pronunciation: 'hē',
+        phonetic: 'HUH →',
         meaning: 'drink',
         context: 'Verb meaning "to drink". Directly follows 喜欢 without needing "to" (unlike English "to drink"). Verb串 (chaining) pattern.'
       },
       {
         original: '咖啡',
         pronunciation: 'kāfēi',
+        phonetic: 'kah-FAY → →',
         meaning: 'coffee',
         context: 'Noun. Phonetic transliteration: 咖 (kā) + 啡 (fēi) = "kāfēi" sounds like "coffee". Characters chosen for sound, not meaning.'
       },
@@ -264,9 +272,27 @@ export const mandarinGlosses: Gloss[] = [
     language: 'mandarin',
     phrase: '你好吗？',
     segments: [
-      { original: '你', pronunciation: 'nǐ', meaning: 'you' },
-      { original: '好', pronunciation: 'hǎo', meaning: 'good/well' },
-      { original: '吗？', pronunciation: 'ma?', meaning: '[question particle]' },
+      {
+        original: '你',
+        pronunciation: 'nǐ',
+        phonetic: 'NEE ↗',
+        meaning: 'you',
+        context: 'Personal pronoun (2nd person singular). Subject of the sentence.'
+      },
+      {
+        original: '好',
+        pronunciation: 'hǎo',
+        phonetic: 'HOW ↘↗',
+        meaning: 'good/well',
+        context: 'Adjective/stative verb meaning "good/fine/well". Can act as both adjective and verb in Chinese.'
+      },
+      {
+        original: '吗？',
+        pronunciation: 'ma?',
+        phonetic: 'MAH? →',
+        meaning: '[question particle]',
+        context: 'Question particle that turns statements into yes/no questions. Always comes at the end. No change to word order needed!'
+      },
     ],
     literalTranslation: 'you good [question]?',
     naturalTranslation: 'How are you?',
@@ -277,10 +303,34 @@ export const mandarinGlosses: Gloss[] = [
     language: 'mandarin',
     phrase: '我想去中国',
     segments: [
-      { original: '我', pronunciation: 'wǒ', meaning: 'I' },
-      { original: '想', pronunciation: 'xiǎng', meaning: 'want/think' },
-      { original: '去', pronunciation: 'qù', meaning: 'go' },
-      { original: '中国', pronunciation: 'Zhōngguó', meaning: 'China' },
+      {
+        original: '我',
+        pronunciation: 'wǒ',
+        phonetic: 'WUH ↘↗',
+        meaning: 'I',
+        context: 'Personal pronoun. Subject.'
+      },
+      {
+        original: '想',
+        pronunciation: 'xiǎng',
+        phonetic: 'shee-AHNG ↗',
+        meaning: 'want/think',
+        context: 'Verb meaning "to want/wish/think". Like 喜欢, can be followed directly by another verb. Verb chaining!'
+      },
+      {
+        original: '去',
+        pronunciation: 'qù',
+        phonetic: 'chyoo ↘',
+        meaning: 'go',
+        context: 'Verb "to go". Follows 想 directly (no "to"). Direction verbs don\'t need prepositions before destinations.'
+      },
+      {
+        original: '中国',
+        pronunciation: 'Zhōngguó',
+        phonetic: 'JONG-gwoh → ↗',
+        meaning: 'China',
+        context: 'Proper noun. Literally "Middle Kingdom": 中 (middle/center) + 国 (country/kingdom). China\'s traditional name for itself!'
+      },
     ],
     literalTranslation: 'I want go China',
     naturalTranslation: 'I want to go to China',
@@ -291,11 +341,41 @@ export const mandarinGlosses: Gloss[] = [
     language: 'mandarin',
     phrase: '这是我的书',
     segments: [
-      { original: '这', pronunciation: 'zhè', meaning: 'this' },
-      { original: '是', pronunciation: 'shì', meaning: 'is' },
-      { original: '我', pronunciation: 'wǒ', meaning: 'I/me' },
-      { original: '的', pronunciation: 'de', meaning: '[possessive]' },
-      { original: '书', pronunciation: 'shū', meaning: 'book' },
+      {
+        original: '这',
+        pronunciation: 'zhè',
+        phonetic: 'JYEH ↘',
+        meaning: 'this',
+        context: 'Demonstrative pronoun. Subject of the sentence. Points to something nearby.'
+      },
+      {
+        original: '是',
+        pronunciation: 'shì',
+        phonetic: 'SHIR ↘',
+        meaning: 'is',
+        context: 'Copula "to be". Same form for all subjects (no conjugation).'
+      },
+      {
+        original: '我',
+        pronunciation: 'wǒ',
+        phonetic: 'WUH ↘↗',
+        meaning: 'I/me',
+        context: 'Personal pronoun. Here used as possessor before 的.'
+      },
+      {
+        original: '的',
+        pronunciation: 'de',
+        phonetic: 'DUH →',
+        meaning: '[possessive]',
+        context: 'Possessive particle. Links possessor to possessed. Like English "\'s" but comes AFTER the possessor: 我的 = "my/mine".'
+      },
+      {
+        original: '书',
+        pronunciation: 'shū',
+        phonetic: 'SHOO →',
+        meaning: 'book',
+        context: 'Noun. The thing being possessed. Word order: possessor + 的 + possessed.'
+      },
     ],
     literalTranslation: 'this is I [possessive] book',
     naturalTranslation: 'This is my book',

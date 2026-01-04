@@ -108,6 +108,13 @@ export function GlossReader({ language, onComplete }: GlossReaderProps) {
                       {segment.pronunciation}
                     </div>
 
+                    {/* Phonetic guide for Mandarin */}
+                    {segment.phonetic && (
+                      <div className="gloss-phonetic">
+                        {segment.phonetic}
+                      </div>
+                    )}
+
                     {/* Literal meaning */}
                     <div className="gloss-meaning">
                       {segment.meaning}
