@@ -15,9 +15,10 @@ import { CardReview } from './components/CardReview';
 import { ConversationPractice } from './components/ConversationPractice';
 import { WritingExercise } from './components/WritingExercise';
 import { ProgressDashboard } from './components/ProgressDashboard';
+import { GlossReader } from './components/GlossReader';
 import './styles.css';
 
-type SessionPhase = 'start' | 'srs' | 'grammar' | 'conversation' | 'writing' | 'complete';
+type SessionPhase = 'start' | 'srs' | 'gloss' | 'conversation' | 'writing' | 'complete';
 
 function App() {
   const [state, setState] = useState<AppState>(() => {
@@ -64,6 +65,10 @@ function App() {
       return { ...prev, cards: updatedCards };
     });
 
+    setCurrentPhase('gloss');
+  };
+
+  const handleGlossComplete = () => {
     setCurrentPhase('conversation');
   };
 
@@ -133,7 +138,18 @@ function App() {
         <CardReview
           cards={dueCards}
           onReviewComplete={handleSRSComplete}
-          onExit={() => setCurrentPhase('conversation')}
+          onExit={() => setCurrentPhase('gloss')}
+        />
+      </div>
+    );
+  }
+
+  if (currentPhase === 'gloss' && currentLanguage) {
+    return (
+      <div className="app">
+        <GlossReader
+          language={currentLanguage}
+          onComplete={handleGlossComplete}
         />
       </div>
     );

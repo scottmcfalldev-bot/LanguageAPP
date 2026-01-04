@@ -102,18 +102,28 @@ Based on research showing focused daily practice beats mixed sessions:
 - Bidirectional cards (English→Target AND Target→English)
 - Only cards due TODAY (no wasted time)
 
-### Minutes 6-15: Grammar/Pattern Acquisition
-- One focused grammar concept
-- Comprehensible input at i+1 difficulty
-- Interactive sentence construction
+### Minutes 6-10: Interlinear Reading (NEW!)
+- **Character-by-character breakdown** of phrases
+- Visual mapping between characters and meanings
+- See literal vs. natural translations side-by-side
+- **Example:** 我喜欢喝咖啡 breaks down to:
+  ```
+  我      喜欢     喝      咖啡
+  wǒ     xǐhuan   hē     kāfēi
+  I      like   drink  coffee
 
-### Minutes 16-25: AI Conversation Practice
+  Literal: "I like drink coffee"
+  Natural: "I like to drink coffee"
+  ```
+- Understand how each language constructs meaning differently
+
+### Minutes 11-20: AI Conversation Practice
 - **This is where PolyPath destroys Duolingo**
 - Real conversation with Claude AI
 - Contextual corrections with explanations
 - Adaptive difficulty based on your responses
 
-### Minutes 26-30: Production Output
+### Minutes 21-30: Production Output
 - Write 3-5 sentences using today's material
 - Pure active recall (no assistance)
 - AI provides detailed feedback after submission
@@ -214,8 +224,10 @@ npm run build
 - [x] SM-2 spaced repetition
 - [x] 5-day weekly schedule
 - [x] 30-minute session structure
+- [x] **Interlinear gloss reader** (character-by-character breakdown)
 - [x] Progress tracking
 - [x] Seed vocabulary (250+ cards)
+- [x] 14 example glosses across all three languages
 
 ### v1.1 (Planned)
 - [ ] Claude API integration for conversation (currently simulated)
