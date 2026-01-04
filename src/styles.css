@@ -1011,14 +1011,38 @@ button {
 
 .gloss-phonetic {
   font-size: 0.75rem;
-  color: var(--color-success);
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
   font-family: monospace;
   margin-top: 0.25rem;
   padding: 0.25rem 0.5rem;
-  background: rgba(16, 185, 129, 0.1);
   border-radius: 0.25rem;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Tone 1: Level/Flat (→) - Solid Blue */
+.gloss-phonetic.tone-1 {
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  border: 1px solid #2563eb;
+}
+
+/* Tone 2: Rising (↗) - Green gradient (dark to light) */
+.gloss-phonetic.tone-2 {
+  background: linear-gradient(90deg, #059669, #34d399);
+  border: 1px solid #047857;
+}
+
+/* Tone 3: Dipping (↘↗) - Orange/Amber gradient (light-dark-light) */
+.gloss-phonetic.tone-3 {
+  background: linear-gradient(90deg, #f59e0b, #d97706, #f59e0b);
+  border: 1px solid #d97706;
+}
+
+/* Tone 4: Falling (↘) - Red gradient (light to dark) */
+.gloss-phonetic.tone-4 {
+  background: linear-gradient(90deg, #f87171, #dc2626);
+  border: 1px solid #b91c1c;
 }
 
 .gloss-meaning {

@@ -110,7 +110,7 @@ export function GlossReader({ language, onComplete }: GlossReaderProps) {
 
                     {/* Phonetic guide for Mandarin */}
                     {segment.phonetic && (
-                      <div className="gloss-phonetic">
+                      <div className={`gloss-phonetic ${segment.tone ? `tone-${segment.tone}` : ''}`}>
                         {segment.phonetic}
                       </div>
                     )}
