@@ -112,6 +112,16 @@ export function GlossReader({ language, onComplete }: GlossReaderProps) {
                     <div className="gloss-meaning">
                       {segment.meaning}
                     </div>
+
+                    {/* Grammatical context (NEW!) */}
+                    {segment.context && (
+                      <div className="gloss-context">
+                        <span className="context-icon">ℹ️</span>
+                        <div className="context-tooltip">
+                          {segment.context}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

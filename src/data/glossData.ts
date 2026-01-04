@@ -11,6 +11,7 @@ export interface GlossSegment {
   original: string;      // The character/syllable in target language
   pronunciation: string; // Romanization (pinyin, romaji, etc.)
   meaning: string;       // Literal English meaning
+  context?: string;      // Grammatical function and why it's used
 }
 
 export interface Gloss {
@@ -32,8 +33,18 @@ export const spanishGlosses: Gloss[] = [
     language: 'spanish',
     phrase: 'Buenos días',
     segments: [
-      { original: 'Buenos', pronunciation: 'BWEH-nos', meaning: 'good (masculine plural)' },
-      { original: 'días', pronunciation: 'DEE-as', meaning: 'days' },
+      {
+        original: 'Buenos',
+        pronunciation: 'BWEH-nos',
+        meaning: 'good (masculine plural)',
+        context: 'Adjective that must agree in gender (masculine) and number (plural) with the noun it modifies. Base form is "bueno".'
+      },
+      {
+        original: 'días',
+        pronunciation: 'DEE-as',
+        meaning: 'days',
+        context: 'Masculine plural noun. Spanish greetings literally say "good days/afternoons/nights" instead of just "good morning/afternoon/evening".'
+      },
     ],
     literalTranslation: 'good days',
     naturalTranslation: 'Good morning',
@@ -69,10 +80,30 @@ export const spanishGlosses: Gloss[] = [
     language: 'spanish',
     phrase: 'Me gusta el café',
     segments: [
-      { original: 'Me', pronunciation: 'meh', meaning: 'to-me' },
-      { original: 'gusta', pronunciation: 'GOOS-tah', meaning: 'it-pleases' },
-      { original: 'el', pronunciation: 'el', meaning: 'the (masculine)' },
-      { original: 'café', pronunciation: 'kah-FEH', meaning: 'coffee' },
+      {
+        original: 'Me',
+        pronunciation: 'meh',
+        meaning: 'to-me',
+        context: 'Indirect object pronoun. Indicates who receives the action. Comes BEFORE the verb in Spanish (unlike English).'
+      },
+      {
+        original: 'gusta',
+        pronunciation: 'GOOS-tah',
+        meaning: 'it-pleases',
+        context: 'Verb "gustar" (to please). Conjugated for 3rd person singular because "café" is the subject doing the pleasing. NOT "I like"!'
+      },
+      {
+        original: 'el',
+        pronunciation: 'el',
+        meaning: 'the (masculine)',
+        context: 'Definite article. Must match noun gender. "Café" is masculine, so we use "el" not "la".'
+      },
+      {
+        original: 'café',
+        pronunciation: 'kah-FEH',
+        meaning: 'coffee',
+        context: 'Masculine singular noun. This is the SUBJECT of the sentence - coffee is doing the pleasing!'
+      },
     ],
     literalTranslation: 'to-me it-pleases the coffee',
     naturalTranslation: 'I like coffee',
@@ -89,10 +120,30 @@ export const japaneseGlosses: Gloss[] = [
     language: 'japanese',
     phrase: '私は学生です',
     segments: [
-      { original: '私', pronunciation: 'watashi', meaning: 'I' },
-      { original: 'は', pronunciation: 'wa', meaning: '[topic marker]' },
-      { original: '学生', pronunciation: 'gakusei', meaning: 'student' },
-      { original: 'です', pronunciation: 'desu', meaning: '[polite copula]' },
+      {
+        original: '私',
+        pronunciation: 'watashi',
+        meaning: 'I',
+        context: 'Personal pronoun (first person). Can be omitted in casual speech when context is clear.'
+      },
+      {
+        original: 'は',
+        pronunciation: 'wa',
+        meaning: '[topic marker]',
+        context: 'Particle that marks the topic of the sentence. Says "As for [私], ..." Sets up what you\'re talking about. Written は but pronounced "wa".'
+      },
+      {
+        original: '学生',
+        pronunciation: 'gakusei',
+        meaning: 'student',
+        context: 'Noun. Two kanji: 学 (study/learning) + 生 (person/life) = "study person".'
+      },
+      {
+        original: 'です',
+        pronunciation: 'desu',
+        meaning: '[is]',
+        context: 'Copula verb (links subject to description). Polite form of "to be". Makes the sentence formal. Casual equivalent is だ (da).'
+      },
     ],
     literalTranslation: 'I [topic] student [is]',
     naturalTranslation: 'I am a student',
@@ -151,9 +202,24 @@ export const mandarinGlosses: Gloss[] = [
     language: 'mandarin',
     phrase: '我是学生',
     segments: [
-      { original: '我', pronunciation: 'wǒ', meaning: 'I' },
-      { original: '是', pronunciation: 'shì', meaning: 'am/is/are' },
-      { original: '学生', pronunciation: 'xuéshēng', meaning: 'student' },
+      {
+        original: '我',
+        pronunciation: 'wǒ',
+        meaning: 'I',
+        context: 'Personal pronoun (1st person singular). Subject of the sentence. Can be omitted when context is clear.'
+      },
+      {
+        original: '是',
+        pronunciation: 'shì',
+        meaning: 'am/is/are',
+        context: 'Copula verb meaning "to be". Does NOT change form for different subjects - same for I/you/he/we/they. No conjugation!'
+      },
+      {
+        original: '学生',
+        pronunciation: 'xuéshēng',
+        meaning: 'student',
+        context: 'Noun made of 2 characters: 学 (study/learning) + 生 (person/life) = "study person". Common character-building pattern.'
+      },
     ],
     literalTranslation: 'I am student',
     naturalTranslation: 'I am a student',
@@ -164,10 +230,30 @@ export const mandarinGlosses: Gloss[] = [
     language: 'mandarin',
     phrase: '我喜欢喝咖啡',
     segments: [
-      { original: '我', pronunciation: 'wǒ', meaning: 'I' },
-      { original: '喜欢', pronunciation: 'xǐhuan', meaning: 'like' },
-      { original: '喝', pronunciation: 'hē', meaning: 'drink' },
-      { original: '咖啡', pronunciation: 'kāfēi', meaning: 'coffee' },
+      {
+        original: '我',
+        pronunciation: 'wǐ',
+        meaning: 'I',
+        context: 'Personal pronoun. Subject of the sentence.'
+      },
+      {
+        original: '喜欢',
+        pronunciation: 'xǐhuan',
+        meaning: 'like',
+        context: 'Verb meaning "to like/enjoy". Can be followed directly by another verb (no "to" needed). This is verb chaining!'
+      },
+      {
+        original: '喝',
+        pronunciation: 'hē',
+        meaning: 'drink',
+        context: 'Verb meaning "to drink". Directly follows 喜欢 without needing "to" (unlike English "to drink"). Verb串 (chaining) pattern.'
+      },
+      {
+        original: '咖啡',
+        pronunciation: 'kāfēi',
+        meaning: 'coffee',
+        context: 'Noun. Phonetic transliteration: 咖 (kā) + 啡 (fēi) = "kāfēi" sounds like "coffee". Characters chosen for sound, not meaning.'
+      },
     ],
     literalTranslation: 'I like drink coffee',
     naturalTranslation: 'I like to drink coffee',
